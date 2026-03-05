@@ -1,0 +1,13 @@
+{
+  "query": "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_NAME LIKE '%blog%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 229SuzWWvyFWDS3.root --database 3no3SFbize3PiJiUNAXEf9 --execute SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_NAME LIKE '%blog%';",
+  "rows": [
+    {
+      "TABLE_NAME": "blogArticles"
+    }
+  ],
+  "messages": [],
+  "stdout": "TABLE_NAME\nblogArticles\n",
+  "stderr": "",
+  "execution_time_ms": 347
+}

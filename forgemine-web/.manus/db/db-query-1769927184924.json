@@ -1,0 +1,25 @@
+{
+  "query": "SELECT quotationNumber, laborCost, materialsCost, equipmentCost, operationalCost, subtotalCost, profitMargin, profitAmount, netPrice, totalPrice, materialsProvider, equipmentProvider, operationalProvider FROM generatedQuotations WHERE quotationNumber = 'COT-2026-005';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 229SuzWWvyFWDS3.root --database 3no3SFbize3PiJiUNAXEf9 --execute SELECT quotationNumber, laborCost, materialsCost, equipmentCost, operationalCost, subtotalCost, profitMargin, profitAmount, netPrice, totalPrice, materialsProvider, equipmentProvider, operationalProvider FROM generatedQuotations WHERE quotationNumber = 'COT-2026-005';",
+  "rows": [
+    {
+      "quotationNumber": "COT-2026-005",
+      "laborCost": "91080000",
+      "materialsCost": "0",
+      "equipmentCost": "0",
+      "operationalCost": "0",
+      "subtotalCost": "91080000",
+      "profitMargin": "50",
+      "profitAmount": "45540000",
+      "netPrice": "136620000",
+      "totalPrice": "162577800",
+      "materialsProvider": "client",
+      "equipmentProvider": "client",
+      "operationalProvider": "client"
+    }
+  ],
+  "messages": [],
+  "stdout": "quotationNumber\tlaborCost\tmaterialsCost\tequipmentCost\toperationalCost\tsubtotalCost\tprofitMargin\tprofitAmount\tnetPrice\ttotalPrice\tmaterialsProvider\tequipmentProvider\toperationalProvider\nCOT-2026-005\t91080000\t0\t0\t0\t91080000\t50\t45540000\t136620000\t162577800\tclient\tclient\tclient\n",
+  "stderr": "",
+  "execution_time_ms": 402
+}

@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /api/
+
+Sitemap: https://www.forgeminechile.com/sitemap.xml
+
+# FORGEMINE CHILE SpA - Reparación de Baldes Mineros

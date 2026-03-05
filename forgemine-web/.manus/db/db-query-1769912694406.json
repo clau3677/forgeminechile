@@ -1,0 +1,26 @@
+{
+  "query": "SELECT quotationNumber, pdfUrl FROM generatedQuotations ORDER BY id DESC LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 229SuzWWvyFWDS3.root --database 3no3SFbize3PiJiUNAXEf9 --execute SELECT quotationNumber, pdfUrl FROM generatedQuotations ORDER BY id DESC LIMIT 5;",
+  "rows": [
+    {
+      "quotationNumber": "COT-2026-004",
+      "pdfUrl": "https://d2xsxph8kpxj0f.cloudfront.net/89514103/3no3SFbize3PiJiUNAXEf9/quotations/COT-2026-004.pdf"
+    },
+    {
+      "quotationNumber": "COT-2026-003",
+      "pdfUrl": "https://d2xsxph8kpxj0f.cloudfront.net/89514103/3no3SFbize3PiJiUNAXEf9/quotations/COT-2026-003.pdf"
+    },
+    {
+      "quotationNumber": "COT-2026-002",
+      "pdfUrl": "https://d2xsxph8kpxj0f.cloudfront.net/89514103/3no3SFbize3PiJiUNAXEf9/quotations/COT-2026-002.pdf"
+    },
+    {
+      "quotationNumber": "COT-2026-001",
+      "pdfUrl": "https://d2xsxph8kpxj0f.cloudfront.net/89514103/3no3SFbize3PiJiUNAXEf9/quotations/COT-2026-001.pdf"
+    }
+  ],
+  "messages": [],
+  "stdout": "quotationNumber\tpdfUrl\nCOT-2026-004\thttps://d2xsxph8kpxj0f.cloudfront.net/89514103/3no3SFbize3PiJiUNAXEf9/quotations/COT-2026-004.pdf\nCOT-2026-003\thttps://d2xsxph8kpxj0f.cloudfront.net/89514103/3no3SFbize3PiJiUNAXEf9/quotations/COT-2026-003.pdf\nCOT-2026-002\thttps://d2xsxph8kpxj0f.cloudfront.net/89514103/3no3SFbize3PiJiUNAXEf9/quotations/COT-2026-002.pdf\nCOT-2026-001\thttps://d2xsxph8kpxj0f.cloudfront.net/89514103/3no3SFbize3PiJiUNAXEf9/quotations/COT-2026-001.pdf\n",
+  "stderr": "",
+  "execution_time_ms": 118
+}

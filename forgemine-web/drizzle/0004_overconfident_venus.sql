@@ -1,0 +1,20 @@
+CREATE TABLE `blogArticles` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`slug` varchar(255) NOT NULL,
+	`title` varchar(255) NOT NULL,
+	`excerpt` text NOT NULL,
+	`content` text NOT NULL,
+	`coverImage` varchar(500),
+	`category` enum('soldadura','blindaje','reparacion','equipos','seguridad','normativas') NOT NULL,
+	`tags` json,
+	`metaTitle` varchar(70),
+	`metaDescription` varchar(160),
+	`author` varchar(255) NOT NULL DEFAULT 'Equipo Técnico FORGEMINE',
+	`isPublished` enum('yes','no') NOT NULL DEFAULT 'no',
+	`readTimeMinutes` int NOT NULL DEFAULT 5,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	`publishedAt` timestamp,
+	CONSTRAINT `blogArticles_id` PRIMARY KEY(`id`),
+	CONSTRAINT `blogArticles_slug_unique` UNIQUE(`slug`)
+);

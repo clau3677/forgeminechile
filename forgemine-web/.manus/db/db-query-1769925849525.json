@@ -1,0 +1,88 @@
+{
+  "query": "SELECT id, quotationNumber, materialsCost, equipmentCost, operationalCost, originalMaterialsCost, originalEquipmentCost, originalOperationalCost, materialsProvider, equipmentProvider, operationalProvider FROM generatedQuotations;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 229SuzWWvyFWDS3.root --database 3no3SFbize3PiJiUNAXEf9 --execute SELECT id, quotationNumber, materialsCost, equipmentCost, operationalCost, originalMaterialsCost, originalEquipmentCost, originalOperationalCost, materialsProvider, equipmentProvider, operationalProvider FROM generatedQuotations;",
+  "rows": [
+    {
+      "id": "9",
+      "quotationNumber": "COT-2026-001",
+      "materialsCost": "36917960",
+      "equipmentCost": "21535000",
+      "operationalCost": "60290000",
+      "originalMaterialsCost": "NULL",
+      "originalEquipmentCost": "NULL",
+      "originalOperationalCost": "NULL",
+      "materialsProvider": "forgemine",
+      "equipmentProvider": "forgemine",
+      "operationalProvider": "forgemine"
+    },
+    {
+      "id": "10",
+      "quotationNumber": "COT-2026-002",
+      "materialsCost": "1794832",
+      "equipmentCost": "4190000",
+      "operationalCost": "12410000",
+      "originalMaterialsCost": "NULL",
+      "originalEquipmentCost": "NULL",
+      "originalOperationalCost": "NULL",
+      "materialsProvider": "forgemine",
+      "equipmentProvider": "forgemine",
+      "operationalProvider": "forgemine"
+    },
+    {
+      "id": "13",
+      "quotationNumber": "COT-2026-003",
+      "materialsCost": "17234950",
+      "equipmentCost": "11470000",
+      "operationalCost": "35930000",
+      "originalMaterialsCost": "NULL",
+      "originalEquipmentCost": "NULL",
+      "originalOperationalCost": "NULL",
+      "materialsProvider": "forgemine",
+      "equipmentProvider": "forgemine",
+      "operationalProvider": "forgemine"
+    },
+    {
+      "id": "30001",
+      "quotationNumber": "COT-2026-004",
+      "materialsCost": "36917960",
+      "equipmentCost": "21535000",
+      "operationalCost": "56030000",
+      "originalMaterialsCost": "NULL",
+      "originalEquipmentCost": "NULL",
+      "originalOperationalCost": "NULL",
+      "materialsProvider": "forgemine",
+      "equipmentProvider": "forgemine",
+      "operationalProvider": "forgemine"
+    },
+    {
+      "id": "30002",
+      "quotationNumber": "COT-2026-005",
+      "materialsCost": "36917960",
+      "equipmentCost": "21535000",
+      "operationalCost": "56030000",
+      "originalMaterialsCost": "NULL",
+      "originalEquipmentCost": "NULL",
+      "originalOperationalCost": "NULL",
+      "materialsProvider": "forgemine",
+      "equipmentProvider": "forgemine",
+      "operationalProvider": "forgemine"
+    },
+    {
+      "id": "30003",
+      "quotationNumber": "COT-2026-006",
+      "materialsCost": "0",
+      "equipmentCost": "0",
+      "operationalCost": "0",
+      "originalMaterialsCost": "NULL",
+      "originalEquipmentCost": "NULL",
+      "originalOperationalCost": "NULL",
+      "materialsProvider": "forgemine",
+      "equipmentProvider": "forgemine",
+      "operationalProvider": "forgemine"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tquotationNumber\tmaterialsCost\tequipmentCost\toperationalCost\toriginalMaterialsCost\toriginalEquipmentCost\toriginalOperationalCost\tmaterialsProvider\tequipmentProvider\toperationalProvider\n9\tCOT-2026-001\t36917960\t21535000\t60290000\tNULL\tNULL\tNULL\tforgemine\tforgemine\tforgemine\n10\tCOT-2026-002\t1794832\t4190000\t12410000\tNULL\tNULL\tNULL\tforgemine\tforgemine\tforgemine\n13\tCOT-2026-003\t17234950\t11470000\t35930000\tNULL\tNULL\tNULL\tforgemine\tforgemine\tforgemine\n30001\tCOT-2026-004\t36917960\t21535000\t56030000\tNULL\tNULL\tNULL\tforgemine\tforgemine\tforgemine\n30002\tCOT-2026-005\t36917960\t21535000\t56030000\tNULL\tNULL\tNULL\tforgemine\tforgemine\tforgemine\n30003\tCOT-2026-006\t0\t0\t0\tNULL\tNULL\tNULL\tforgemine\tforgemine\tforgemine\n",
+  "stderr": "",
+  "execution_time_ms": 71
+}

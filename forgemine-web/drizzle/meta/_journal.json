@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1769831141367,
+      "tag": "0000_strong_moira_mactaggert",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1769831190277,
+      "tag": "0001_stale_timeslip",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1769843204994,
+      "tag": "0002_lovely_thunderbolt_ross",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1769925564990,
+      "tag": "0003_redundant_nekra",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1770895518430,
+      "tag": "0004_overconfident_venus",
+      "breakpoints": true
+    }
+  ]
+}

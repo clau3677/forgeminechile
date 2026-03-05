@@ -1,0 +1,346 @@
+{
+  "query": "DESCRIBE generatedQuotations;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 229SuzWWvyFWDS3.root --database 3no3SFbize3PiJiUNAXEf9 --execute DESCRIBE generatedQuotations;",
+  "rows": [
+    {
+      "Field": "id",
+      "Type": "int",
+      "Null": "NO",
+      "Key": "PRI",
+      "Default": "NULL",
+      "Extra": "auto_increment"
+    },
+    {
+      "Field": "quotationNumber",
+      "Type": "varchar(50)",
+      "Null": "NO",
+      "Key": "UNI",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "clientName",
+      "Type": "varchar(255)",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "clientRut",
+      "Type": "varchar(20)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "clientAddress",
+      "Type": "varchar(500)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "clientCity",
+      "Type": "varchar(100)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "clientContact",
+      "Type": "varchar(255)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "clientPhone",
+      "Type": "varchar(50)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "clientEmail",
+      "Type": "varchar(320)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "equipmentType",
+      "Type": "varchar(100)",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "equipmentBrand",
+      "Type": "varchar(100)",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "equipmentModel",
+      "Type": "varchar(100)",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "equipmentSerial",
+      "Type": "varchar(100)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "equipmentCapacity",
+      "Type": "varchar(50)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "equipmentLocation",
+      "Type": "varchar(255)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "serviceType",
+      "Type": "enum('repair','shielding','reconstruction')",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "durationDays",
+      "Type": "int",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "materialsProvider",
+      "Type": "enum('forgemine','client')",
+      "Null": "NO",
+      "Key": "",
+      "Default": "forgemine",
+      "Extra": ""
+    },
+    {
+      "Field": "equipmentProvider",
+      "Type": "enum('forgemine','client')",
+      "Null": "NO",
+      "Key": "",
+      "Default": "forgemine",
+      "Extra": ""
+    },
+    {
+      "Field": "operationalProvider",
+      "Type": "enum('forgemine','client')",
+      "Null": "NO",
+      "Key": "",
+      "Default": "forgemine",
+      "Extra": ""
+    },
+    {
+      "Field": "laborCost",
+      "Type": "int",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "materialsCost",
+      "Type": "int",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "equipmentCost",
+      "Type": "int",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "operationalCost",
+      "Type": "int",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "subtotalCost",
+      "Type": "int",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "profitMargin",
+      "Type": "int",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "profitAmount",
+      "Type": "int",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "netPrice",
+      "Type": "int",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "ivaAmount",
+      "Type": "int",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "totalPrice",
+      "Type": "int",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "costBreakdown",
+      "Type": "json",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "validityDays",
+      "Type": "int",
+      "Null": "NO",
+      "Key": "",
+      "Default": "30",
+      "Extra": ""
+    },
+    {
+      "Field": "paymentTerms",
+      "Type": "varchar(255)",
+      "Null": "NO",
+      "Key": "",
+      "Default": "50% anticipo / 50% entrega",
+      "Extra": ""
+    },
+    {
+      "Field": "warrantyTerms",
+      "Type": "varchar(255)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "additionalNotes",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "status",
+      "Type": "enum('draft','sent','accepted','rejected','expired')",
+      "Null": "NO",
+      "Key": "",
+      "Default": "draft",
+      "Extra": ""
+    },
+    {
+      "Field": "pdfUrl",
+      "Type": "varchar(500)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "linkedQuoteId",
+      "Type": "int",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "createdById",
+      "Type": "int",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "createdAt",
+      "Type": "timestamp",
+      "Null": "NO",
+      "Key": "",
+      "Default": "CURRENT_TIMESTAMP",
+      "Extra": ""
+    },
+    {
+      "Field": "updatedAt",
+      "Type": "timestamp",
+      "Null": "NO",
+      "Key": "",
+      "Default": "CURRENT_TIMESTAMP",
+      "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP"
+    },
+    {
+      "Field": "sentAt",
+      "Type": "timestamp",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    }
+  ],
+  "messages": [],
+  "stdout": "Field\tType\tNull\tKey\tDefault\tExtra\nid\tint\tNO\tPRI\tNULL\tauto_increment\nquotationNumber\tvarchar(50)\tNO\tUNI\tNULL\t\nclientName\tvarchar(255)\tNO\t\tNULL\t\nclientRut\tvarchar(20)\tYES\t\tNULL\t\nclientAddress\tvarchar(500)\tYES\t\tNULL\t\nclientCity\tvarchar(100)\tYES\t\tNULL\t\nclientContact\tvarchar(255)\tYES\t\tNULL\t\nclientPhone\tvarchar(50)\tYES\t\tNULL\t\nclientEmail\tvarchar(320)\tYES\t\tNULL\t\nequipmentType\tvarchar(100)\tNO\t\tNULL\t\nequipmentBrand\tvarchar(100)\tNO\t\tNULL\t\nequipmentModel\tvarchar(100)\tNO\t\tNULL\t\nequipmentSerial\tvarchar(100)\tYES\t\tNULL\t\nequipmentCapacity\tvarchar(50)\tYES\t\tNULL\t\nequipmentLocation\tvarchar(255)\tYES\t\tNULL\t\nserviceType\tenum('repair','shielding','reconstruction')\tNO\t\tNULL\t\ndurationDays\tint\tNO\t\tNULL\t\nmaterialsProvider\tenum('forgemine','client')\tNO\t\tforgemine\t\nequipmentProvider\tenum('forgemine','client')\tNO\t\tforgemine\t\noperationalProvider\tenum('forgemine','client')\tNO\t\tforgemine\t\nlaborCost\tint\tNO\t\tNULL\t\nmaterialsCost\tint\tNO\t\tNULL\t\nequipmentCost\tint\tNO\t\tNULL\t\noperationalCost\tint\tNO\t\tNULL\t\nsubtotalCost\tint\tNO\t\tNULL\t\nprofitMargin\tint\tNO\t\tNULL\t\nprofitAmount\tint\tNO\t\tNULL\t\nnetPrice\tint\tNO\t\tNULL\t\nivaAmount\tint\tNO\t\tNULL\t\ntotalPrice\tint\tNO\t\tNULL\t\ncostBreakdown\tjson\tYES\t\tNULL\t\nvalidityDays\tint\tNO\t\t30\t\npaymentTerms\tvarchar(255)\tNO\t\t50% anticipo / 50% entrega\t\nwarrantyTerms\tvarchar(255)\tYES\t\tNULL\t\nadditionalNotes\ttext\tYES\t\tNULL\t\nstatus\tenum('draft','sent','accepted','rejected','expired')\tNO\t\tdraft\t\npdfUrl\tvarchar(500)\tYES\t\tNULL\t\nlinkedQuoteId\tint\tYES\t\tNULL\t\ncreatedById\tint\tYES\t\tNULL\t\ncreatedAt\ttimestamp\tNO\t\tCURRENT_TIMESTAMP\t\nupdatedAt\ttimestamp\tNO\t\tCURRENT_TIMESTAMP\tDEFAULT_GENERATED on update CURRENT_TIMESTAMP\nsentAt\ttimestamp\tYES\t\tNULL\t\n",
+  "stderr": "",
+  "execution_time_ms": 55
+}
