@@ -5,6 +5,7 @@
  */
 
 import { useEffect } from "react";
+import { useSiteConfig } from "@/hooks/useSiteConfig";
 
 interface SEOHeadProps {
   title?: string;
@@ -22,8 +23,6 @@ interface SEOHeadProps {
   noindex?: boolean;
 }
 
-const OG_IMAGE_DEFAULT = "https://files.manuscdn.com/user_upload_by_module/session_file/89514103/hzGeXrvpMdGQXKtT.jpg";
-const SITE_NAME = "FORGEMINE CHILE";
 const SITE_URL = "https://www.forgeminechile.com";
 
 function setMetaTag(property: string, content: string, isName = false): void {
@@ -52,32 +51,27 @@ export default function SEOHead({
   article,
   noindex = false,
 }: SEOHeadProps) {
+  const config = useSiteConfig();
+
   useEffect(() => {
+    const siteName = config.company.name;
     const fullTitle = title
-      ? `${title} | FORGEMINE Chile`
-      : "Reparación de Baldes Mineros Chile | FORGEMINE";
-    const fullDescription =
-      description ||
-      "Reparación y blindaje de baldes mineros en Chile. Soldadura AWS D1.1 para Komatsu, CAT, Liebherr. Servicio en Santiago, Antofagasta y Calama. Cotiza ahora.";
-    const fullImage = image || OG_IMAGE_DEFAULT;
+      ? `${title} | ${siteName}`
+      : config.seo.title;
+    const fullDescription = description || config.seo.description;
+    const fullImage = image || config.seo.ogImage;
     const fullUrl = url ? `${SITE_URL}${url}` : window.location.href;
 
-    // Page title
     document.title = fullTitle;
 
-    // Basic meta
     setMetaTag("description", fullDescription, true);
 
-    // Robots
     if (noindex) {
       setMetaTag("robots", "noindex, nofollow", true);
     } else {
       setMetaTag("robots", "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1", true);
     }
 
-    // ==========================================
-    // Open Graph (Facebook, Instagram, LinkedIn)
-    // ==========================================
     setMetaTag("og:type", type);
     setMetaTag("og:url", fullUrl);
     setMetaTag("og:title", fullTitle);
@@ -86,22 +80,16 @@ export default function SEOHead({
     setMetaTag("og:image:width", "1200");
     setMetaTag("og:image:height", "630");
     setMetaTag("og:image:type", "image/jpeg");
-    setMetaTag("og:image:alt", title || "FORGEMINE Chile - Reparación de Baldes Mineros");
+    setMetaTag("og:image:alt", title || `${siteName} - Reparación de Baldes Mineros`);
     setMetaTag("og:locale", "es_CL");
-    setMetaTag("og:site_name", SITE_NAME);
+    setMetaTag("og:site_name", siteName);
 
-    // ==========================================
-    // Twitter Card (also used by other platforms)
-    // ==========================================
     setMetaTag("twitter:card", "summary_large_image", true);
     setMetaTag("twitter:title", fullTitle, true);
     setMetaTag("twitter:description", fullDescription, true);
     setMetaTag("twitter:image", fullImage, true);
-    setMetaTag("twitter:image:alt", title || "FORGEMINE Chile - Reparación de Baldes Mineros", true);
+    setMetaTag("twitter:image:alt", title || `${siteName} - Reparación de Baldes Mineros`, true);
 
-    // ==========================================
-    // Article-specific tags (for blog posts)
-    // ==========================================
     if (type === "article" && article) {
       if (article.author) setMetaTag("article:author", article.author);
       if (article.publishedTime) setMetaTag("article:published_time", article.publishedTime);
@@ -113,7 +101,6 @@ export default function SEOHead({
         });
       }
     } else {
-      // Clean up article tags if not article type
       removeMetaTag("article:author");
       removeMetaTag("article:published_time");
       removeMetaTag("article:modified_time");
@@ -121,7 +108,6 @@ export default function SEOHead({
       removeMetaTag("article:tag");
     }
 
-    // Canonical URL
     let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
     if (!canonical) {
       canonical = document.createElement("link");
@@ -130,13 +116,12 @@ export default function SEOHead({
     }
     canonical.setAttribute("href", fullUrl);
 
-    // Cleanup on unmount - restore defaults
     return () => {
-      document.title = "Reparación de Baldes Mineros Chile | FORGEMINE";
-      setMetaTag("description", "Reparación y blindaje de baldes mineros en Chile. Soldadura AWS D1.1 para Komatsu, CAT, Liebherr. Servicio en Santiago, Antofagasta y Calama. Cotiza ahora.", true);
-      setMetaTag("og:title", "Reparación de Baldes Mineros Chile | FORGEMINE");
-      setMetaTag("og:description", "Reparación y blindaje de baldes mineros en Chile. Soldadura AWS D1.1 para Komatsu, CAT, Liebherr. Servicio en Santiago, Antofagasta y Calama.");
-      setMetaTag("og:image", OG_IMAGE_DEFAULT);
+      document.title = config.seo.title;
+      setMetaTag("description", config.seo.description, true);
+      setMetaTag("og:title", config.seo.title);
+      setMetaTag("og:description", config.seo.description);
+      setMetaTag("og:image", config.seo.ogImage);
       setMetaTag("og:url", SITE_URL);
       setMetaTag("og:type", "website");
       removeMetaTag("article:author");
@@ -145,7 +130,7 @@ export default function SEOHead({
       removeMetaTag("article:section");
       removeMetaTag("article:tag");
     };
-  }, [title, description, image, url, type, article, noindex]);
+  }, [title, description, image, url, type, article, noindex, config]);
 
   return null;
 }

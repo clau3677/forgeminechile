@@ -18,6 +18,7 @@ import BlogArticle from "./pages/BlogArticle";
 import Promo from "./pages/Promo";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
+import AdminBrandSettings from "./pages/AdminBrandSettings";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -37,6 +38,7 @@ function Router() {
       <Route path={"/admin/cotizaciones"} component={QuotationsList} />
       <Route path={"/admin/cotizaciones/nueva"} component={QuotationGenerator} />
       <Route path={"/admin/cotizaciones/editar/:id"} component={EditQuotation} />
+      <Route path={"/admin/configuracion"} component={AdminBrandSettings} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

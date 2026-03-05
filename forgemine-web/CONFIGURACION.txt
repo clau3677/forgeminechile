@@ -1,0 +1,113 @@
+=============================================
+  COMO PERSONALIZAR TU SITIO WEB
+  Plantilla Web Profesional para Empresas
+=============================================
+
+Tienes DOS formas de personalizar el sitio.
+Elige la que mas te acomode:
+
+
+==============================================
+OPCION A — Desde el Panel Admin (RECOMENDADO)
+==============================================
+No necesitas tocar ningun archivo de codigo.
+
+1. Inicia sesion en:  tudominio.com/admin
+
+2. En el menu lateral haz clic en "Configuracion"
+
+3. En esa pantalla puedes:
+   - Subir tu logo (arrastra o selecciona el archivo)
+   - Cambiar el nombre de tu empresa
+   - Editar el telefono, email y direccion
+   - Poner tus URLs de LinkedIn, Facebook, Instagram y WhatsApp
+   - Personalizar el titulo y descripcion que aparece en Google
+
+4. Haz clic en "Guardar cambios"
+
+Los cambios se reflejan en el sitio de inmediato,
+sin necesidad de redesplegar ni recompilar.
+
+
+=============================================
+OPCION B — Editar el Archivo de Configuracion
+=============================================
+Para usuarios que prefieren editar texto directamente.
+
+1. Abre el archivo:
+   client/src/site.config.ts
+
+2. Edita los valores entre comillas. Por ejemplo:
+
+   name: "MI EMPRESA CHILE",         <- Nombre visible
+   phone: "+56912345678",            <- Numero de telefono
+   email: "contacto@miempresa.com",  <- Correo electronico
+   address: "Antofagasta, Chile",    <- Ciudad o direccion
+
+3. Guarda el archivo
+
+4. Vuelve a compilar y desplegar el proyecto:
+   npm run build
+
+
+=============================================
+DONDE ESTAN LOS ARCHIVOS PRINCIPALES
+=============================================
+
+Archivo de configuracion rapida:
+  client/src/site.config.ts
+
+Paginas del sitio:
+  client/src/pages/Home.tsx            <- Pagina principal
+  client/src/pages/PrivacyPolicy.tsx   <- Politica de privacidad
+  client/src/pages/TermsOfService.tsx  <- Terminos de servicio
+
+Componentes reutilizables:
+  client/src/components/Header.tsx     <- Barra superior y logo
+  client/src/components/Footer.tsx     <- Pie de pagina
+  client/src/components/SEOHead.tsx    <- Titulo y meta tags de Google
+
+Panel de administracion:
+  client/src/pages/AdminDashboard.tsx  <- Solicitudes de cotizacion
+  client/src/pages/AdminBrandSettings.tsx <- Configuracion del sitio
+
+Base de datos (para migrar al nuevo servidor):
+  drizzle/0005_site_settings.sql       <- Tabla de configuracion
+
+
+=============================================
+INSTALACION EN UN SERVIDOR NUEVO
+=============================================
+
+1. Copia todos los archivos al servidor
+
+2. Crea la base de datos y ejecuta las migraciones:
+   npm run db:migrate
+
+   O ejecuta manualmente el archivo SQL:
+   drizzle/0005_site_settings.sql
+
+3. Configura las variables de entorno en el servidor:
+   DATABASE_URL=mysql://...
+   SESSION_SECRET=...
+
+4. Instala dependencias y compila:
+   npm install
+   npm run build
+
+5. Inicia el servidor:
+   npm start
+
+6. Inicia sesion en /admin y ve a "Configuracion"
+   para personalizar con los datos de tu empresa.
+
+
+=============================================
+SOPORTE
+=============================================
+
+Si tienes dudas sobre la personalizacion, revisa
+primero el archivo client/src/site.config.ts,
+todos los campos estan comentados en espanol.
+
+=============================================

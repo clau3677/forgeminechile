@@ -1,9 +1,10 @@
 /**
- * Footer Component - FORGEMINE CHILE SpA
+ * Footer Component
  * Design: Industrial Forge Aesthetic - Dark with amber accents
  */
 
 import { Phone, Mail, MapPin, Linkedin, Facebook, Instagram } from "lucide-react";
+import { useSiteConfig } from "@/hooks/useSiteConfig";
 
 const certifications = [
   { name: "AWS D1.1", desc: "Soldadura Estructural" },
@@ -21,51 +22,61 @@ const services = [
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const config = useSiteConfig();
 
   return (
-    <footer className="bg-[oklch(0.1_0.01_250)] border-t border-border" role="contentinfo" aria-label="Pie de página FORGEMINE Chile">
+    <footer className="bg-[oklch(0.1_0.01_250)] border-t border-border" role="contentinfo" aria-label={`Pie de página ${config.company.name}`}>
       {/* Main footer content */}
       <div className="container py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Company info */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary rounded flex items-center justify-center">
-                <span className="font-display text-xl font-bold text-primary-foreground">F</span>
-              </div>
+              {config.company.logoUrl ? (
+                <img
+                  src={config.company.logoUrl}
+                  alt={`Logo ${config.company.name}`}
+                  className="h-10 w-auto object-contain"
+                />
+              ) : (
+                <div className="w-10 h-10 bg-primary rounded flex items-center justify-center">
+                  <span className="font-display text-xl font-bold text-primary-foreground">
+                    {config.company.name.charAt(0)}
+                  </span>
+                </div>
+              )}
               <div>
-                <h3 className="font-display text-lg font-bold tracking-wider">FORGEMINE CHILE</h3>
-                <p className="text-xs text-muted-foreground">SpA</p>
+                <h3 className="font-display text-lg font-bold tracking-wider">{config.company.name}</h3>
+                <p className="text-xs text-muted-foreground">{config.company.legalName.replace(config.company.name, "").trim()}</p>
               </div>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Especialistas en reparación, reconstrucción y blindaje de baldes para equipos pesados de minería. 
-              Forjando el futuro de la minería chilena.
+              {config.company.tagline}. Especialistas en reparación, reconstrucción y blindaje de baldes para equipos pesados de minería.
             </p>
             <div className="flex gap-3">
               <a
-                href="https://www.linkedin.com/company/forgemine-chile"
+                href={config.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="FORGEMINE Chile en LinkedIn"
+                aria-label={`${config.company.name} en LinkedIn`}
                 className="w-9 h-9 bg-secondary rounded flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
               <a
-                href="https://www.facebook.com/forgeminechile"
+                href={config.social.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="FORGEMINE Chile en Facebook"
+                aria-label={`${config.company.name} en Facebook`}
                 className="w-9 h-9 bg-secondary rounded flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
               >
                 <Facebook className="w-4 h-4" />
               </a>
               <a
-                href="https://www.instagram.com/forgeminechile"
+                href={config.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="FORGEMINE Chile en Instagram"
+                aria-label={`${config.company.name} en Instagram`}
                 className="w-9 h-9 bg-secondary rounded flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
               >
                 <Instagram className="w-4 h-4" />
@@ -108,20 +119,20 @@ export default function Footer() {
             <h4 className="font-display text-sm font-semibold tracking-wider text-primary">CONTACTO</h4>
             <ul className="space-y-3">
               <li>
-                <a href="tel:+56992779872" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <a href={`tel:${config.company.phone}`} className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors">
                   <Phone className="w-4 h-4 text-primary" />
-                  <span>+56 9 9277 9872</span>
+                  <span>{config.company.phoneFormatted}</span>
                 </a>
               </li>
               <li>
-                <a href="mailto:contacto@forgeminechile.com" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <a href={`mailto:${config.company.email}`} className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors">
                   <Mail className="w-4 h-4 text-primary" />
-                  <span>contacto@forgeminechile.com</span>
+                  <span>{config.company.email}</span>
                 </a>
               </li>
               <li className="flex items-start gap-3 text-sm text-muted-foreground">
                 <MapPin className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                <span>Santiago de Chile</span>
+                <span>{config.company.address}</span>
               </li>
             </ul>
           </div>
@@ -131,7 +142,7 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-border">
         <div className="container py-4 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
-          <p>© {currentYear} FORGEMINE CHILE SpA. Todos los derechos reservados.</p>
+          <p>© {currentYear} {config.company.legalName}. Todos los derechos reservados.</p>
           <div className="flex gap-6">
             <a href="/politica-de-privacidad" className="hover:text-foreground transition-colors">Política de Privacidad</a>
             <a href="/terminos-de-servicio" className="hover:text-foreground transition-colors">Términos de Servicio</a>

@@ -3,7 +3,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { z } from "zod";
-import { createQuote, getAllQuotes, getQuoteById, updateQuoteStatus, updateQuoteNotes, getQuoteStats, getAllCostParameters, getCostParametersByCategory, createCostParameter, updateCostParameter, deleteCostParameter, seedDefaultCostParameters, createGeneratedQuotation, getAllGeneratedQuotations, getGeneratedQuotationById, updateGeneratedQuotation, deleteGeneratedQuotation, getNextQuotationNumber, getPublishedArticles, getAllArticles, getArticleBySlug, getArticleById, createArticle, updateArticle, deleteArticle, getArticlesByCategory } from "./db";
+import { createQuote, getAllQuotes, getQuoteById, updateQuoteStatus, updateQuoteNotes, getQuoteStats, getAllCostParameters, getCostParametersByCategory, createCostParameter, updateCostParameter, deleteCostParameter, seedDefaultCostParameters, createGeneratedQuotation, getAllGeneratedQuotations, getGeneratedQuotationById, updateGeneratedQuotation, deleteGeneratedQuotation, getNextQuotationNumber, getPublishedArticles, getAllArticles, getArticleBySlug, getArticleById, createArticle, updateArticle, deleteArticle, getArticlesByCategory, getAllSiteSettings, upsertSiteSetting, upsertSiteSettings } from "./db";
 import { htmlToPdf } from "./pdfHelper";
 import { storagePut, storageGet } from "./storage";
 import { generateQuotationPdfHtml } from "./pdfGenerator";
@@ -1246,6 +1246,54 @@ Reglas de comportamiento:
         }
         await deleteArticle(input.id);
         return { success: true };
+      }),
+  }),
+
+  // Site Settings router — brand configuration
+  siteSettings: router({
+    // Public: get all settings as key/value map
+    get: publicProcedure.query(async () => {
+      return getAllSiteSettings();
+    }),
+
+    // Admin: update a single setting
+    update: protectedProcedure
+      .input(z.object({ key: z.string().min(1), value: z.string() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") {
+          throw new Error("Unauthorized: Admin access required");
+        }
+        await upsertSiteSetting(input.key, input.value);
+        return { success: true };
+      }),
+
+    // Admin: update multiple settings at once
+    updateMany: protectedProcedure
+      .input(z.object({ settings: z.record(z.string(), z.string()) }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") {
+          throw new Error("Unauthorized: Admin access required");
+        }
+        await upsertSiteSettings(input.settings);
+        return { success: true };
+      }),
+
+    // Admin: upload logo — stores image in S3 and saves URL as logo_url setting
+    uploadLogo: protectedProcedure
+      .input(z.object({
+        fileData: z.string(),
+        fileName: z.string().default("logo"),
+        contentType: z.string().default("image/png"),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") {
+          throw new Error("Unauthorized: Admin access required");
+        }
+        const buffer = Buffer.from(input.fileData, "base64");
+        const ext = input.contentType.split("/")[1] || "png";
+        const result = await storagePut(`brand/logo.${ext}`, buffer, input.contentType);
+        await upsertSiteSetting("logo_url", result.url);
+        return { url: result.url };
       }),
   }),
 });

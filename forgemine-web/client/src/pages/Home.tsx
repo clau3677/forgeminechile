@@ -7,6 +7,7 @@
 import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { motion, useInView } from "framer-motion";
+import { useSiteConfig } from "@/hooks/useSiteConfig";
 import { 
   Wrench, Shield, RefreshCw, Truck, Award, CheckCircle2, 
   Phone, Mail, MapPin, ArrowRight, Clock, Users, ThumbsUp,
@@ -242,6 +243,7 @@ function BlogHighlightSection() {
 }
 
 export default function Home() {
+  const config = useSiteConfig();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -653,7 +655,7 @@ export default function Home() {
               className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-display tracking-wider"
               asChild
             >
-              <a href="mailto:contacto@forgeminechile.com">Enviar Correo</a>
+              <a href={`mailto:${config.company.email}`}>Enviar Correo</a>
             </Button>
           </div>
         </div>
@@ -689,8 +691,8 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="font-display font-bold text-foreground uppercase text-sm mb-1">Teléfono</h4>
-                    <a href="tel:+56992779872" className="text-muted-foreground hover:text-primary transition-colors">
-                      +56 9 9277 9872
+                    <a href={`tel:${config.company.phone}`} className="text-muted-foreground hover:text-primary transition-colors">
+                      {config.company.phoneFormatted}
                     </a>
                   </div>
                 </div>
@@ -701,8 +703,8 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="font-display font-bold text-foreground uppercase text-sm mb-1">Email</h4>
-                    <a href="mailto:contacto@forgeminechile.com" className="text-muted-foreground hover:text-primary transition-colors">
-                      contacto@forgeminechile.com
+                    <a href={`mailto:${config.company.email}`} className="text-muted-foreground hover:text-primary transition-colors">
+                      {config.company.email}
                     </a>
                   </div>
                 </div>
@@ -714,7 +716,7 @@ export default function Home() {
                   <div>
                     <h4 className="font-display font-bold text-foreground uppercase text-sm mb-1">Ubicación</h4>
                     <p className="text-muted-foreground">
-                      Santiago de Chile
+                      {config.company.address}
                     </p>
                   </div>
                 </div>
@@ -766,7 +768,7 @@ export default function Home() {
 
       {/* WhatsApp Button */}
       <a
-        href="https://wa.me/56992779872"
+        href={`https://wa.me/${config.social.whatsapp}`}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contactar por WhatsApp"

@@ -1,6 +1,6 @@
 import { eq, desc, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, quotes, InsertQuote, Quote, costParameters, InsertCostParameter, CostParameter, generatedQuotations, InsertGeneratedQuotation, GeneratedQuotation, blogArticles, InsertBlogArticle, BlogArticle } from "../drizzle/schema";
+import { InsertUser, users, quotes, InsertQuote, Quote, costParameters, InsertCostParameter, CostParameter, generatedQuotations, InsertGeneratedQuotation, GeneratedQuotation, blogArticles, InsertBlogArticle, BlogArticle, siteSettings, SiteSetting } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -609,5 +609,56 @@ export async function getArticlesByCategory(category: string): Promise<BlogArtic
   } catch (error) {
     console.error("[Database] Failed to get articles by category:", error);
     throw error;
+  }
+}
+
+// ─── Site Settings ────────────────────────────────────────────────────────────
+
+export async function getAllSiteSettings(): Promise<Record<string, string>> {
+  const db = await getDb();
+  if (!db) return {};
+
+  try {
+    const rows = await db.select().from(siteSettings);
+    return Object.fromEntries(rows.map(r => [r.key, r.value]));
+  } catch (error) {
+    console.error("[Database] Failed to get site settings:", error);
+    return {};
+  }
+}
+
+export async function getSiteSetting(key: string): Promise<string | null> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const rows = await db.select().from(siteSettings).where(eq(siteSettings.key, key)).limit(1);
+    return rows[0]?.value ?? null;
+  } catch (error) {
+    console.error("[Database] Failed to get site setting:", error);
+    return null;
+  }
+}
+
+export async function upsertSiteSetting(key: string, value: string): Promise<void> {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot upsert site setting: database not available");
+    return;
+  }
+
+  try {
+    await db.insert(siteSettings)
+      .values({ key, value })
+      .onDuplicateKeyUpdate({ set: { value, updatedAt: new Date() } });
+  } catch (error) {
+    console.error("[Database] Failed to upsert site setting:", error);
+    throw error;
+  }
+}
+
+export async function upsertSiteSettings(settings: Record<string, string>): Promise<void> {
+  for (const [key, value] of Object.entries(settings)) {
+    await upsertSiteSetting(key, value);
   }
 }

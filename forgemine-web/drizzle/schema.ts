@@ -199,3 +199,19 @@ export const blogArticles = mysqlTable("blogArticles", {
 
 export type BlogArticle = typeof blogArticles.$inferSelect;
 export type InsertBlogArticle = typeof blogArticles.$inferInsert;
+
+/**
+ * Site settings table — key/value store for admin-configurable site data
+ * Keys: logo_url, company_name, company_legal_name, tagline, phone,
+ *       email, address, social_linkedin, social_facebook, social_instagram,
+ *       social_whatsapp, seo_title, seo_description, seo_og_image
+ */
+export const siteSettings = mysqlTable("siteSettings", {
+  id: int("id").autoincrement().primaryKey(),
+  key: varchar("key", { length: 100 }).notNull().unique(),
+  value: text("value").notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type SiteSetting = typeof siteSettings.$inferSelect;
+export type InsertSiteSetting = typeof siteSettings.$inferInsert;

@@ -1,5 +1,5 @@
 /**
- * Header Component - FORGEMINE CHILE SpA
+ * Header Component
  * Design: Industrial Forge Aesthetic - Dark with amber accents
  */
 
@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { Menu, X, Phone, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSiteConfig } from "@/hooks/useSiteConfig";
 
 const navItems = [
   { label: "Inicio", href: "#inicio" },
@@ -20,6 +21,7 @@ const navItems = [
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const config = useSiteConfig();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,7 +37,6 @@ export default function Header() {
       setIsMobileMenuOpen(false);
       return;
     }
-    // If we're not on the home page, navigate there first
     if (window.location.pathname !== '/') {
       window.location.href = '/' + href;
       return;
@@ -53,18 +54,18 @@ export default function Header() {
       <div className="bg-[oklch(0.1_0.01_250)] border-b border-border py-2 hidden md:block">
         <div className="container flex justify-between items-center text-sm">
           <div className="flex items-center gap-6">
-            <a href="tel:+56992779872" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
+            <a href={`tel:${config.company.phone}`} className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
               <Phone className="w-4 h-4" />
-              <span>+56 9 9277 9872</span>
+              <span>{config.company.phoneFormatted}</span>
             </a>
-            <a href="mailto:contacto@forgeminechile.com" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
+            <a href={`mailto:${config.company.email}`} className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
               <Mail className="w-4 h-4" />
-              <span>contacto@forgeminechile.com</span>
+              <span>{config.company.email}</span>
             </a>
           </div>
           <div className="flex items-center gap-2 text-muted-foreground">
             <MapPin className="w-4 h-4" />
-            <span>Santiago de Chile</span>
+            <span>{config.company.address}</span>
           </div>
         </div>
       </div>
@@ -86,17 +87,28 @@ export default function Header() {
                 e.preventDefault();
                 scrollToSection("#inicio");
               }}
+              aria-label={`${config.company.name} - Ir al inicio`}
               className="flex items-center gap-3 group"
             >
-              <div className="w-10 h-10 bg-primary rounded flex items-center justify-center group-hover:shadow-[0_0_20px_oklch(0.75_0.18_70/0.5)] transition-all">
-                <span className="font-display text-xl font-bold text-primary-foreground">F</span>
-              </div>
+              {config.company.logoUrl ? (
+                <img
+                  src={config.company.logoUrl}
+                  alt={`Logo ${config.company.name}`}
+                  className="h-10 w-auto object-contain"
+                />
+              ) : (
+                <div className="w-10 h-10 bg-primary rounded flex items-center justify-center group-hover:shadow-[0_0_20px_oklch(0.75_0.18_70/0.5)] transition-all">
+                  <span className="font-display text-xl font-bold text-primary-foreground">
+                    {config.company.name.charAt(0)}
+                  </span>
+                </div>
+              )}
               <div className="flex flex-col">
                 <span className="font-display text-xl font-bold tracking-wider text-foreground">
-                  FORGEMINE CHILE
+                  {config.company.name}
                 </span>
                 <span className="text-[10px] text-primary tracking-[0.3em] uppercase">
-                  Forjando el Futuro
+                  {config.company.tagline}
                 </span>
               </div>
             </a>
