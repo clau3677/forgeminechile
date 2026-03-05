@@ -1,8 +1,12 @@
-import { COOKIE_NAME } from "@shared/const";
+import { COOKIE_NAME, ONE_YEAR_MS } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { z } from "zod";
+import { TRPCError } from "@trpc/server";
+import bcrypt from "bcryptjs";
+import { SignJWT } from "jose";
+import { ENV } from "./_core/env";
 import { createQuote, getAllQuotes, getQuoteById, updateQuoteStatus, updateQuoteNotes, getQuoteStats, getAllCostParameters, getCostParametersByCategory, createCostParameter, updateCostParameter, deleteCostParameter, seedDefaultCostParameters, createGeneratedQuotation, getAllGeneratedQuotations, getGeneratedQuotationById, updateGeneratedQuotation, deleteGeneratedQuotation, getNextQuotationNumber, getPublishedArticles, getAllArticles, getArticleBySlug, getArticleById, createArticle, updateArticle, deleteArticle, getArticlesByCategory, getAllSiteSettings, upsertSiteSetting, upsertSiteSettings } from "./db";
 import { htmlToPdf } from "./pdfHelper";
 import { storagePut, storageGet } from "./storage";
@@ -30,6 +34,42 @@ export const appRouter = router({
         success: true,
       } as const;
     }),
+    loginWithPassword: publicProcedure
+      .input(z.object({
+        email: z.string().email(),
+        password: z.string().min(1),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        const expectedEmail = ENV.adminEmail;
+        const expectedHash = ENV.adminPasswordHash;
+
+        if (!expectedEmail || !expectedHash) {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "ADMIN_EMAIL y ADMIN_PASSWORD_HASH no estan configurados en .env",
+          });
+        }
+
+        if (input.email !== expectedEmail) {
+          throw new TRPCError({ code: "UNAUTHORIZED", message: "Credenciales incorrectas" });
+        }
+
+        const valid = await bcrypt.compare(input.password, expectedHash);
+        if (!valid) {
+          throw new TRPCError({ code: "UNAUTHORIZED", message: "Credenciales incorrectas" });
+        }
+
+        const secret = new TextEncoder().encode(ENV.jwtSecret);
+        const jwtToken = await new SignJWT({ email: input.email, role: "admin" })
+          .setProtectedHeader({ alg: "HS256" })
+          .setExpirationTime("365d")
+          .sign(secret);
+
+        const token = "own." + jwtToken;
+        const cookieOptions = getSessionCookieOptions(ctx.req);
+        ctx.res.cookie(COOKIE_NAME, token, { ...cookieOptions, maxAge: ONE_YEAR_MS });
+        return { success: true } as const;
+      }),
   }),
 
   // Storage router for file uploads

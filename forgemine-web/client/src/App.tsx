@@ -19,6 +19,7 @@ import Promo from "./pages/Promo";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import AdminBrandSettings from "./pages/AdminBrandSettings";
+import AdminLogin from "./pages/AdminLogin";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -33,6 +34,7 @@ function Router() {
       <Route path={"/politica-de-privacidad"} component={PrivacyPolicy} />
       <Route path={"/terminos-de-servicio"} component={TermsOfService} />
       <Route path={"/admin"} component={AdminDashboard} />
+      <Route path={"/admin/login"} component={AdminLogin} />
       <Route path={"/admin/costos"} component={CostParameters} />
       <Route path={"/admin/parametros-costos"} component={CostParameters} />
       <Route path={"/admin/cotizaciones"} component={QuotationsList} />

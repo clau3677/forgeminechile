@@ -7,4 +7,7 @@ export const ENV = {
   isProduction: process.env.NODE_ENV === "production",
   forgeApiUrl: process.env.BUILT_IN_FORGE_API_URL ?? "",
   forgeApiKey: process.env.BUILT_IN_FORGE_API_KEY ?? "",
+  adminEmail: process.env.ADMIN_EMAIL ?? "",
+  adminPasswordHash: process.env.ADMIN_PASSWORD_HASH ?? "",
+  jwtSecret: process.env.JWT_SECRET ?? process.env.SESSION_SECRET ?? "changeme-set-JWT_SECRET-in-env",
 };

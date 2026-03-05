@@ -12,7 +12,7 @@ OPCION A — Desde el Panel Admin (RECOMENDADO)
 ==============================================
 No necesitas tocar ningun archivo de codigo.
 
-1. Inicia sesion en:  tudominio.com/admin
+1. Inicia sesion en:  tudominio.com/admin/login
 
 2. En el menu lateral haz clic en "Configuracion"
 
@@ -27,6 +27,33 @@ No necesitas tocar ningun archivo de codigo.
 
 Los cambios se reflejan en el sitio de inmediato,
 sin necesidad de redesplegar ni recompilar.
+
+
+=============================================
+PRIMER ACCESO AL PANEL ADMIN
+=============================================
+Antes de ingresar al panel, debes configurar
+tus credenciales de acceso.
+
+PASO 1 — Genera el hash de tu contrasena:
+   Abre una terminal en la raiz del proyecto y ejecuta:
+
+   node scripts/generate-hash.js TuContraseñaSegura
+
+   Ejemplo:
+   node scripts/generate-hash.js MiClave2024!
+
+PASO 2 — Copia el resultado en tu archivo .env:
+
+   ADMIN_EMAIL=admin@tuempresa.com
+   ADMIN_PASSWORD_HASH=$2b$10$...  <- pega aqui el hash generado
+   JWT_SECRET=una-clave-larga-y-secreta-cualquiera
+
+PASO 3 — Reinicia el servidor y entra a:
+   tudominio.com/admin/login
+
+IMPORTANTE: No guardes tu contrasena en texto plano.
+Solo guarda el HASH que genera el script.
 
 
 =============================================
@@ -70,6 +97,7 @@ Componentes reutilizables:
 Panel de administracion:
   client/src/pages/AdminDashboard.tsx  <- Solicitudes de cotizacion
   client/src/pages/AdminBrandSettings.tsx <- Configuracion del sitio
+  client/src/pages/AdminLogin.tsx      <- Pagina de inicio de sesion
 
 Base de datos (para migrar al nuevo servidor):
   drizzle/0005_site_settings.sql       <- Tabla de configuracion
@@ -89,7 +117,9 @@ INSTALACION EN UN SERVIDOR NUEVO
 
 3. Configura las variables de entorno en el servidor:
    DATABASE_URL=mysql://...
-   SESSION_SECRET=...
+   ADMIN_EMAIL=admin@tuempresa.com
+   ADMIN_PASSWORD_HASH=$2b$10$...  <- genera con scripts/generate-hash.js
+   JWT_SECRET=clave-secreta-larga
 
 4. Instala dependencias y compila:
    npm install
@@ -98,8 +128,8 @@ INSTALACION EN UN SERVIDOR NUEVO
 5. Inicia el servidor:
    npm start
 
-6. Inicia sesion en /admin y ve a "Configuracion"
-   para personalizar con los datos de tu empresa.
+6. Inicia sesion en /admin/login con tu email y contrasena.
+   Luego ve a "Configuracion" para personalizar tu empresa.
 
 
 =============================================
